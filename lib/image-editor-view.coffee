@@ -42,6 +42,11 @@ class ImageEditorView extends ScrollView
       @image.show()
       @emitter.emit 'did-load'
 
+    @emitter.on 'scroll-center', =>
+      imageView = @image.parents('.image-view')
+      imageView.scrollLeft((@image.width() - imageView.width())/2) if @image.width() > imageView.width()
+      imageView.scrollTop((@image.height() - imageView.height())/2) if @image.height() > imageView.height()
+
     @disposables.add atom.tooltips.add @whiteTransparentBackgroundButton[0], title: "Use white transparent background"
     @disposables.add atom.tooltips.add @blackTransparentBackgroundButton[0], title: "Use black transparent background"
 
